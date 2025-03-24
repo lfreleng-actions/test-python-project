@@ -8,9 +8,9 @@ version = "0.0.1"
 # dynamic = [ "version" ]
 description = "Python project template"
 authors = [
-  { name = "Matthew Watkins", email = "93649628+ModeSevenIndustrialSolutions@users.noreply.github.com" },
+    {name = "Matthew Watkins", email = "mwatkins@linuxfoundation.org"},
 ]
-requires-python = "<3.13,>=3.10"
+requires-python = "<3.13,>=3.11"
 readme = "README.md"
 license = { text = "Apache-2.0" }
 keywords = ["Example", "Python", "Test", "Testing"]
@@ -25,13 +25,12 @@ classifiers = [
   "Programming Language :: Python :: 3 :: Only",
   "Programming Language :: Python :: 3.12",
   "Programming Language :: Python :: 3.11",
-  "Programming Language :: Python :: 3.10",
   "Topic :: Software Development",
 ]
 
 dependencies = [
     "typer",
-    "jupyterlab"
+    "jupyterlab",
 ]
 
 [project.urls]
@@ -64,6 +63,8 @@ test = [
     "pytest-html",
 ]
 
+[tool.pdm]
+distribution = true
 [tool.pdm.scripts]
 test = "pytest"
 tox = "tox"
