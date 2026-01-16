@@ -6,6 +6,7 @@
 import os
 import subprocess
 import sys
+
 from lfreleng_test_python_project.cli import app
 
 

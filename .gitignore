@@ -1,6 +1,9 @@
 # SPDX-License-Identifier: Apache-2.0
 # SPDX-FileCopyrightText: 2025 The Linux Foundation
 
+# Dynamic versioning file is auto-generated/recreated
+src/lfreleng_test_python_project/_version.py
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
@@ -101,6 +104,7 @@ ipython_config.py
 #   Similar to Pipfile.lock, it is generally recommended to include uv.lock in version control.
 #   This is especially recommended for binary packages to ensure reproducibility, and is more
 #   commonly ignored for libraries.
+#   Since this is a test project, we track uv.lock for reproducibility.
 #uv.lock
 
 # poetry

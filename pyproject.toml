@@ -1,17 +1,20 @@
 # SPDX-License-Identifier: Apache-2.0
 # SPDX-FileCopyrightText: 2025 The Linux Foundation
 
+[build-system]
+requires = ["hatchling>=1.24", "hatch-vcs>=0.4"]
+build-backend = "hatchling.build"
+
 [project]
 name = "lfreleng-test-python-project"
-version = "0.0.1"
+dynamic = ["version"]
 description = "Sample Python project used for testing actions"
 authors = [
-    {name = "Matthew Watkins", email = "93649628+ModeSevenIndustrialSolutions@users.noreply.github.com"},
+    { name = "Matthew Watkins", email = "93649628+ModeSevenIndustrialSolutions@users.noreply.github.com" },
 ]
-dependencies = ["typer>=0.15.2", "jupyterlab>=4.3.6"]
-requires-python = ">=3.11"
+license = "Apache-2.0"
 readme = "README.md"
-license = {text = "Apache-2.0"}
+requires-python = ">=3.11"
 classifiers = [
   "Intended Audience :: Developers",
   "Intended Audience :: Science/Research",
@@ -30,31 +33,126 @@ classifiers = [
   "Topic :: Scientific/Engineering",
   "Topic :: Software Development",
 ]
+dependencies = [
+  "typer>=0.15.2",
+  # Note: jupyterlab commented out due to CVE-2025-53000 in nbconvert dependency
+  # Uncomment if notebook testing is needed (check for security fixes first)
+  # "jupyterlab>=4.3.6",
+]
 
-[project.scripts]
-lfreleng-test-python-project = "lfreleng_test_python_project.cli:run"
+[project.urls]
+Homepage = "https://github.com/lfreleng-actions/test-python-project"
+Repository = "https://github.com/lfreleng-actions/test-python-project"
+Downloads = "https://github.com/lfreleng-actions/test-python-project/releases"
+"Bug Tracker" = "https://github.com/lfreleng-actions/test-python-project/issues"
+Documentation = "https://github.com/lfreleng-actions/test-python-project/tree/main/docs"
+"Source Code" = "https://github.com/lfreleng-actions/test-python-project"
 
-[build-system]
-requires = ["pdm-backend"]
-build-backend = "pdm.backend"
-
-
-[tool.pdm]
-distribution = true
-
-[dependency-groups]
-test = [
+[project.optional-dependencies]
+dev = [
     "pytest>=8.3.5",
+    "pytest-cov>=7.0.0",
     "coverage>=7.7.1",
-]
-tox = [
     "tox>=4.24.2",
-    "tox-pdm>=0.7.2",
-]
-lint = [
     "pre-commit>=4.2.0",
-]
-docs = [
     "sphinx>=8.2.3",
     "sphinx-copybutton>=0.5.2",
 ]
+
+[project.scripts]
+lfreleng-test-python-project = "lfreleng_test_python_project.cli:app"
+
+# Hatch dynamic versioning from VCS (tags). Example: tag v0.2.3 -> version 0.2.3
+[tool.hatch.version]
+source = "vcs"
+
+# Optional: control local version scheme (omit commit hash/local segment for reproducible builds)
+[tool.hatch.version.raw-options]
+local_scheme = "no-local-version"
+
+# Generate a file at build time with the resolved version (importable as lfreleng_test_python_project._version.__version__)
+[tool.hatch.build.hooks.vcs]
+version-file = "src/lfreleng_test_python_project/_version.py"
+
+# Wheel build configuration (src layout)
+[tool.hatch.build.targets.wheel]
+packages = ["src/lfreleng_test_python_project"]
+
+# sdists: include everything by default
+[tool.hatch.build.targets.sdist]
+include = ["src", "README.md", "LICENSE*", "pyproject.toml"]
+
+# Dependency group for uv (mirrors dev extra)
+[dependency-groups]
+dev = [
+  "pytest>=8.3.5",
+  "pytest-cov>=7.0.0",
+  "coverage>=7.7.1",
+  "tox>=4.24.2",
+  "pre-commit>=4.2.0",
+  "sphinx>=8.2.3",
+  "sphinx-copybutton>=0.5.2",
+]
+
+[tool.pytest.ini_options]
+testpaths = [
+  "tests/",
+]
+python_files = "test_*.py"
+python_classes = "Test*"
+python_functions = "test_*"
+addopts = [
+  "-v",
+  "--tb=short",
+]
+
+[tool.coverage.run]
+source = ["lfreleng_test_python_project"]
+omit = ["tests/*"]
+data_file = ".coverage"
+
+[tool.coverage.html]
+directory = "coverage_html_report"
+
+[tool.coverage.paths]
+source = [
+    "src/",
+    "*/site-packages/",
+]
+
+[tool.coverage.report]
+fail_under = 45
+skip_empty = true
+ignore_errors = true
+show_missing = true
+
+[tool.mypy]
+python_version = "3.11"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = false
+ignore_missing_imports = true
+
+[tool.ruff]
+target-version = "py311"
+line-length = 88
+
+[tool.ruff.lint]
+select = [
+  "E",
+  "W",
+  "F",
+  "I",
+  "B",
+  "C4",
+  "UP",
+]
+ignore = [
+  "E501",
+  "B008",
+  "C901",
+]
+
+[tool.ruff.lint.per-file-ignores]
+"__init__.py" = ["F401"]
+"tests/**/*" = ["S101", "D"]

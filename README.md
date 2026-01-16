@@ -26,21 +26,29 @@ Contains a sample Python project implementing a CLI tool with [Typer](https://ty
 # The section below renders the badges displayed at the top of the page
 -->
 
-##  Notes
+## Notes
 
-Steps required to initialise pyproject.toml and create initial lock file:
+Steps required to build and work with the project using uv:
 
 ```console
-pdm init
-pdm add -dG test pytest
-pdm add -dG test coverage
-pdm add -dG tox tox-pdm tox
-pdm add -dG lint pre-commit
-pdm add -dG docs sphinx
-pdm add -dG docs sphinx-copybutton
-pdm build
-pdm install --dev
+# Install dependencies
+uv sync --all-extras
+
+# Build the project
+uv build
+
+# Run tests
+uv run pytest
+
+# Run tests with tox
+uv run tox
+
+# Install in development mode
+uv pip install -e .
 ```
+
+The project uses `hatchling` with dynamic versioning from VCS tags. Version
+numbers are automatically generated from git tags.
 
 [pre-commit.ci results page]: https://results.pre-commit.ci/latest/github/lfreleng-actions/test-python-project/main
 [pre-commit.ci status badge]: https://results.pre-commit.ci/badge/github/lfreleng-actions/test-python-project/main.svg
