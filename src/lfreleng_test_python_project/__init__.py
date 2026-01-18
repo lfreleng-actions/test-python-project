@@ -3,14 +3,9 @@
 
 """Sample/test module."""
 
-from importlib.metadata import PackageNotFoundError, version  # pragma: no cover
-
 try:
-    # Change here if project is renamed and does not equal the package name
-    dist_name = "lfreleng-test-python-project"
-    __version__ = version(dist_name)
-
-except PackageNotFoundError:  # pragma: no cover
+    from lfreleng_test_python_project._version import __version__
+except ImportError:
     __version__ = "unknown"
-finally:
-    del version, PackageNotFoundError
+
+__all__ = ["__version__"]
