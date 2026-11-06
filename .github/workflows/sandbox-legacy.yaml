@@ -2,7 +2,7 @@
 # SPDX-FileCopyrightText: 2026 The Linux Foundation
 
 # Deliberate zizmor findings for the findings-ratchet sandbox. Dispatch
-# only: it never runs.
+# only: it never runs, so its findings are inert.
 name: 'Sandbox legacy'
 
 on:

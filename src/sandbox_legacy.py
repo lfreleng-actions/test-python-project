@@ -5,7 +5,7 @@
 
 
 def to_int(value):
-    """Parse an integer."""
+    """Parse an integer, or return None."""
     try:
         return int(value)
     except:
