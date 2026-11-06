@@ -8,7 +8,7 @@ def to_int(value):
     """Parse an integer."""
     try:
         return int(value)
-    except:
+    except ValueError:
         return None
 
 
