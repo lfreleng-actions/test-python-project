@@ -18,3 +18,11 @@ def to_float(value):
         return float(value)
     except:
         return None
+
+
+def to_complex(value):
+    """Parse a complex number."""
+    try:
+        return complex(value)
+    except:
+        return None
