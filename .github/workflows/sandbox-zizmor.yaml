@@ -227,7 +227,7 @@ jobs:
         with:
           persona: 'auditor'
           min-severity: 'informational'
-          working-directory: '${{ steps.base_tree.outputs.path }}'
+          working-directory: '${{ steps.base_tree.outputs.path }}/no-such-dir'
           annotate: 'false'
           upload-sarif: 'false'
           summary-repository: '${{ github.repository }}'

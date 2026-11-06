@@ -347,7 +347,7 @@ jobs:
         with:
           scan-mode: 'changes'
           base: '${{ steps.base_tree.outputs.head-sha }}'
-          working-directory: '${{ steps.base_tree.outputs.path }}'
+          working-directory: '${{ steps.base_tree.outputs.path }}/no-such-dir'
           annotate: 'false'
           upload-sarif: 'false'
           summary-repository: '${{ github.repository }}'
