@@ -1,0 +1,22 @@
+# SPDX-License-Identifier: Apache-2.0
+# SPDX-FileCopyrightText: 2026 The Linux Foundation
+
+# Deliberate zizmor findings for the findings-ratchet sandbox. Dispatch
+# only: it never runs.
+name: 'Sandbox legacy'
+
+on:
+  workflow_dispatch:
+
+permissions: {}
+
+jobs:
+  legacy:
+    name: 'Legacy'
+    runs-on: 'ubuntu-latest'
+    timeout-minutes: 5
+    steps:
+      - name: 'First checkout'
+        uses: actions/checkout@v4
+      - name: 'Second checkout'
+        uses: actions/checkout@v4
