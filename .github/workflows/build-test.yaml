@@ -144,14 +144,14 @@ jobs:
 
       - name: "Python tests [pytest] ${{ matrix.python-version }}"
         # yamllint disable-line rule:line-length
-        uses: lfreleng-actions/python-test-action@0c2fe7546faea2321e003c1c3b26a9156a7bc432 # v1.3.1
+        uses: lfreleng-actions/python-test-action@30acb4cc1f0c1511d1aa56faab7eabe0e7545329 # v1.3.2
         with:
           python_version: ${{ matrix.python-version }}
           report_artefact: true
 
       - name: "Python test [tox -e tests] ${{ matrix.python-version }}"
         # yamllint disable-line rule:line-length
-        uses: lfreleng-actions/python-test-action@0c2fe7546faea2321e003c1c3b26a9156a7bc432 # v1.3.1
+        uses: lfreleng-actions/python-test-action@30acb4cc1f0c1511d1aa56faab7eabe0e7545329 # v1.3.2
         with:
           python_version: ${{ matrix.python-version }}
           tox_tests: true
